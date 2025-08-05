@@ -179,7 +179,7 @@ function Patients() {
       if (sortOrder === 'asc') {
         return nameA.localeCompare(nameB);
       } else if (sortOrder === 'desc') {
-        return nameB.localeCompare(a.name); // Perbaikan: seharusnya nameB.localeCompare(nameA)
+        return nameB.localeCompare(nameA);
       }
       return 0; // Tidak ada pengurutan jika sortOrder bukan 'asc' atau 'desc'
     });
@@ -379,10 +379,14 @@ function Patients() {
               </div>
 
               {/* Pagination dan Keterangan */}
+              {/* Menggunakan d-flex justify-content-between untuk memisahkan pagination dan keterangan */}
               <div className="d-flex justify-content-between align-items-center mt-3 flex-wrap">
-                {/* Pagination (dipindahkan ke tengah) */}
+                {/* Placeholder untuk mengisi ruang di kiri agar pagination bisa di tengah */}
+                <div className="flex-grow-1 d-none d-md-block"></div> 
+
+                {/* Pagination (dipusatkan secara horizontal) */}
                 {filteredAndSortedPatients.length > patientsPerPage && (
-                  <nav className="mb-2 mb-md-0 d-flex justify-content-center flex-grow-1">
+                  <nav className="mb-2 mb-md-0 mx-auto"> {/* mx-auto akan memusatkan nav ini */}
                     <ul className="pagination mb-0">
                       <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
                         <button onClick={() => paginate(currentPage - 1)} className="page-link">
@@ -400,7 +404,7 @@ function Patients() {
                 )}
                 
                 {/* Keterangan filter dan halaman (tetap di kanan) */}
-                <div className="text-dark">
+                <div className="text-dark flex-grow-1 text-end"> {/* text-end untuk rata kanan */}
                   {`Menampilkan ${Math.min(indexOfFirstPatient + 1, filteredAndSortedPatients.length)} - ${Math.min(indexOfLastPatient, filteredAndSortedPatients.length)} dari ${filteredAndSortedPatients.length} data`}
                 </div>
               </div>
