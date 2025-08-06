@@ -55,7 +55,11 @@ export default function Login() {
     // Kontainer utama: Flexbox untuk memusatkan card login di tengah layar
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
       <div className="card shadow p-4 rounded-3" style={{ width: '100%', maxWidth: '400px' }}>
-        <h3 className="text-center mb-4 text-dark">Login</h3>
+        {/* Tambahkan logo rumah sakit di sini */}
+        <div className="text-center mb-3">
+          <img src="/image/rumah sakit.png" alt="Mediva Hospital Logo" style={{ width: '100px' }} />
+        </div>
+        <h3 className="text-center mb-4 text-dark">Mediva Hospital</h3>
         <form onSubmit={handleLogin} noValidate> {/* noValidate untuk menonaktifkan validasi HTML5 bawaan */}
           <div className="mb-3">
             <label htmlFor="email" className="form-label text-dark">Email</label>
@@ -68,7 +72,7 @@ export default function Login() {
                 setEmail(e.target.value);
                 setErrors({ ...errors, email: '' }); // Hapus error saat input berubah
               }}
-              placeholder="Masukkan email Anda" // Placeholder ditambahkan
+              placeholder="Masukkan email Anda"
             />
             {errors.email && <div className="invalid-feedback">{errors.email}</div>}
           </div>
@@ -83,7 +87,7 @@ export default function Login() {
                 setPassword(e.target.value);
                 setErrors({ ...errors, password: '' }); // Hapus error saat input berubah
               }}
-              placeholder="Masukkan password Anda" // Placeholder ditambahkan
+              placeholder="Masukkan password Anda"
             />
             {errors.password && <div className="invalid-feedback">{errors.password}</div>}
           </div>
