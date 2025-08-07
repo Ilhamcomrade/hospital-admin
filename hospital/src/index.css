@@ -1,17 +1,13 @@
-/* src/index.css */
-
-/* Memastikan html dan body mengambil tinggi penuh viewport */
 html, body {
   height: 100%;
-  margin: 0; /* Menghapus margin default browser */
-  padding: 0; /* Menghapus padding default browser */
+  margin: 0;
+  padding: 0;
 }
 
 #root {
-  height: 100%; /* Memastikan root mengambil tinggi penuh parent */
+  height: 100%;
 }
 
-/* Gaya lain tetap sama */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -60,7 +56,26 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-/* Letakkan seluruh blok @media di bagian paling bawah */
+/* Ikon mata di dalam input password */
+.input-icon-right {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6c757d;
+  z-index: 10;
+}
+
+/* Memposisikan pesan error secara absolut agar tidak mempengaruhi tata letak */
+.password-error-absolute {
+  position: absolute;
+  top: 100%; /* Tempatkan di bawah input */
+  left: 0;
+  margin-top: 5px; /* Jarak dari input */
+}
+
+/* Light mode override */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
