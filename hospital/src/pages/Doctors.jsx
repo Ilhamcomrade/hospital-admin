@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import Swal from 'sweetalert2';
 
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,11 +19,10 @@ export default function Doctors() {
 
   // State untuk pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [doctorsPerPage, setDoctorsPerPage] = useState(10);
+  const [doctorsPerPage, setDoctorsPerPage] = useState(10);  
 
   // State untuk sorting
-  const [sortOrder, setSortOrder] = useState('newest'); // <-- Ubah default menjadi 'newest'
-  const [sortField, setSortField] = useState('createdAt'); // <-- Tambahkan state untuk field sorting
+  const [sortOrder, setSortOrder] = useState('asc'); 
 
   // useRef untuk elemen scrollable
   const contentRef = useRef(null);
@@ -149,25 +147,12 @@ export default function Doctors() {
       return matchesSearch;
     })
     .sort((a, b) => {
-      if (sortField === 'name') {
-        const nameA = a.name.toLowerCase();
-        const nameB = b.name.toLowerCase();
-        if (sortOrder === 'asc') {
-          return nameA.localeCompare(nameB);
-        } else if (sortOrder === 'desc') {
-          return nameB.localeCompare(nameA);
-        }
-      }
-      
-      // Logika sorting untuk 'newest' dan 'oldest'
-      if (sortField === 'createdAt') {
-        const dateA = new Date(a.createdAt);
-        const dateB = new Date(b.createdAt);
-        if (sortOrder === 'newest') {
-          return dateB - dateA; // descending
-        } else if (sortOrder === 'oldest') {
-          return dateA - dateB; // ascending
-        }
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+      if (sortOrder === 'asc') {
+        return nameA.localeCompare(nameB);
+      } else if (sortOrder === 'desc') {
+        return nameB.localeCompare(nameA);
       }
       return 0;
     });
@@ -199,14 +184,7 @@ export default function Doctors() {
   };
 
   const handleSortOrderChange = (e) => {
-    const value = e.target.value;
-    if (value === 'asc' || value === 'desc') {
-      setSortField('name');
-      setSortOrder(value);
-    } else {
-      setSortField('createdAt');
-      setSortOrder(value);
-    }
+    setSortOrder(e.target.value);
     setCurrentPage(1);
     if (contentRef.current) {
       contentRef.current.scrollTo({
@@ -215,7 +193,7 @@ export default function Doctors() {
       });
     }
   };
-
+  
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
     setCurrentPage(1);
@@ -269,7 +247,7 @@ export default function Doctors() {
         <div className="flex-grow-1 overflow-auto bg-light" ref={contentRef}>
           <div className="p-4 w-100 bg-light">
             <h2 className="mb-4" style={{ fontSize: '2rem', color: '#000000' }}>
-              Daftar Dokter
+                Daftar Dokter
             </h2>
             <div className="card rounded-3 p-3">
               {/* Filter dan Tombol Aksi */}
@@ -290,17 +268,15 @@ export default function Doctors() {
                   <span className="ms-2 text-dark">data per halaman</span>
                 </div>
                 <div className="d-flex align-items-center flex-wrap">
-                  <label htmlFor="sortOrder" className="form-label me-2 mb-0 text-dark">Urutkan:</label>
+                  <label htmlFor="sortOrder" className="form-label me-2 mb-0 text-dark">Urutkan Nama:</label>
                   <select
                     id="sortOrder"
                     className="form-select w-auto me-3 mb-2 mb-md-0"
-                    value={sortField === 'name' ? sortOrder : sortOrder}
+                    value={sortOrder}
                     onChange={handleSortOrderChange}
                   >
-                    <option value="newest">Terbaru</option>
-                    <option value="oldest">Terlama</option>
-                    <option value="asc">Nama (A-Z)</option>
-                    <option value="desc">Nama (Z-A)</option>
+                    <option value="asc">A-Z</option>
+                    <option value="desc">Z-A</option>
                   </select>
                 </div>
                 <div className="d-flex mt-2 mt-md-0">
@@ -393,20 +369,20 @@ export default function Doctors() {
 
               {/* Pagination dan Keterangan */}
               <div className="d-flex justify-content-between align-items-center mt-3 flex-wrap">
-                <div className="flex-grow-1 d-none d-md-block"></div>
+                <div className="flex-grow-1 d-none d-md-block"></div> 
                 
                 {filteredAndSortedDoctors.length > doctorsPerPage && (
-                  <nav className="mb-2 mb-md-0 mx-auto">
+                  <nav className="mb-2 mb-md-0 mx-auto"> 
                     <ul className="pagination mb-0">
                       <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
                         <button onClick={() => paginate(currentPage - 1)} className="page-link">
-                          &lt;
+                          &lt; 
                         </button>
                       </li>
                       {renderPageNumbers()}
                       <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
                         <button onClick={() => paginate(currentPage + 1)} className="page-link">
-                          &gt;
+                          &gt; 
                         </button>
                       </li>
                     </ul>
