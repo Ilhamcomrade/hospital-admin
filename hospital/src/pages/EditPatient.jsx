@@ -205,7 +205,6 @@ function EditPatient() {
         <Navbar />
         <div className="flex-grow-1 overflow-auto bg-light">
           <div className="p-4 w-100 bg-light">
-            {/* Mengatur warna teks menjadi hitam dan menghilangkan bold */}
             <h2 className="mb-4" style={{ color: '#000000', fontWeight: 'normal' }}>Edit Data Pasien</h2>
             <div className="card rounded-3 p-4">
               <form onSubmit={handleSubmit} noValidate>

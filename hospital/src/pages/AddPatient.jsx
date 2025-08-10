@@ -241,7 +241,7 @@ function AddPatient() {
 
                 <div className="d-flex justify-content-end mt-4">
                   <button type="submit" className="btn btn-success me-2 rounded-pill px-4 py-2 shadow-sm">
-                  Simpan
+                    Simpan
                   </button>
                   <button type="button" className="btn btn-secondary rounded-pill px-4 py-2 shadow-sm" onClick={() => navigate('/patients')}>
                     Kembali

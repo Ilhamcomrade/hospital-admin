@@ -21,5 +21,9 @@ func main() {
 
 	config.ConnectDB()
 	routes.SetupRoutes(r)
+
+	// Mengkonfigurasi Gin untuk melayani file statis dari folder "uploads"
+	r.Static("/uploads", "./uploads")
+
 	r.Run(":8000")
 }

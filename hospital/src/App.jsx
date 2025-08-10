@@ -6,6 +6,9 @@ import Dashboard from './pages/Dashboard';
 import Patients from './pages/Patients';
 import AddPatient from './pages/AddPatient';
 import EditPatient from './pages/EditPatient';
+import Doctors from './pages/Doctors'; // Import halaman Doctors
+import AddDoctor from './pages/AddDoctor'; // Import halaman AddDoctor
+import EditDoctor from './pages/EditDoctor'; // Import halaman EditDoctor
 import ProtectedRoute from './components/ProtectedRoute'; 
 
 function App() {
@@ -47,6 +50,32 @@ function App() {
           element={
             <ProtectedRoute>
               <EditPatient />
+            </ProtectedRoute>
+          }
+        />
+        
+        {/* Rute untuk Dokter (Ditambahkan) */}
+        <Route
+          path="/doctors"
+          element={
+            <ProtectedRoute>
+              <Doctors />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/doctors/add"
+          element={
+            <ProtectedRoute>
+              <AddDoctor />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/doctors/edit/:id"
+          element={
+            <ProtectedRoute>
+              <EditDoctor />
             </ProtectedRoute>
           }
         />

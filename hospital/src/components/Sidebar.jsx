@@ -50,6 +50,21 @@ export default function Sidebar() {
             <span>Pasien</span>
           </NavLink>
         </li>
+        {/* Tambahkan link Dokter di sini */}
+        <li className="nav-item">
+          <NavLink
+            to="/doctors"
+            className={({ isActive }) =>
+              `nav-link d-flex align-items-center py-2 fs-5 rounded ${
+                isActive ? 'bg-primary text-white fw-bold' : 'text-white'
+              }`
+            }
+            style={{ paddingLeft: '0' }}
+          >
+            <i className="fas fa-user-md fa-lg me-2" style={{ marginLeft: '0' }}></i>
+            <span>Dokter</span>
+          </NavLink>
+        </li>
       </ul>
     </div>
   );
